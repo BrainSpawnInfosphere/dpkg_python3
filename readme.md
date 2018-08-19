@@ -26,7 +26,7 @@ slow and not update things. Unfortunately linux homebrew doesn't always work
 
 # Build the Package
 
-Get the current Python number from: ??
+Get the current Python number from: www.python.org
 
 You should be able to use the package already built in this
 repo, but if you want/need to build it, do:
@@ -44,20 +44,20 @@ the above commands, you should now have a shiny new debian package.
 You can double check your package with: `dpkg-deb --info <deb file>`
 
 ```bash
-pi@mario opencv3 $ dpkg-deb --info libopencv3.4.0.deb
+pi@multiped python $ dpkg-deb --info python-3.7.0.deb
  new debian package, version 2.0.
- size 7369108 bytes: control archive=651 bytes.
-     159 bytes,     7 lines   *  control              
-     292 bytes,    10 lines      copyright            
+ size 28513140 bytes: control archive=612 bytes.
+     145 bytes,     7 lines   *  control              
+     288 bytes,    10 lines   *  copyright            
        6 bytes,     1 lines   *  install              
-     512 bytes,    25 lines   *  postinst             #!/bin/bash
- Package: opencv
+     463 bytes,    24 lines   *  postinst             #!/bin/bash
+ Package: python3
  Architecture: all
  Maintainer: Kevin
  Depends: debconf (>= 0.5.00)
  Priority: optional
- Version: 3.4.0
- Description: Kevins computer vision library
+ Version: 3.7.0
+ Description: Kevins python 3
  ```
 
 # Install the Package
