@@ -16,7 +16,9 @@ echo "> start"
 
 PYTHON_VERSION=$1
 CURRDIR=$(pwd)
-PYTHON_INSTALL_DIR="$CURRDIR/python3/usr/local"
+# PYTHON_INSTALL_DIR="$CURRDIR/python3/usr/local"
+PYTHON_INSTALL_DIR="$CURRDIR/python3/home/pi/.local"
+# PYTHON_INSTALL_DIR=/home/pi/.local
 
 echo ""
 echo "-------------------------------------------------"
@@ -45,7 +47,7 @@ cd Python-$PYTHON_VERSION
 # make and install
 # set the threads and load avg to 4 so we don't have issues
 make -j 4 -l 4
-make install
+make altinstall
 
 # clean up
 #rm -fr Python-$PYTHON_VERSION

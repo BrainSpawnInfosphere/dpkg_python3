@@ -11,12 +11,19 @@ fi
 
 VERSION=$1
 
+DEBPKG=kevin-python-${VERSION}.deb
+
+
+if [ -f  ${DEBPKG} ]; then
+  rm -f ${DEBPKG}
+fi
+
 # clean out debian info and recreate it
 rm -fr ./python3/DEBIAN
 mkdir -p ./python3/DEBIAN
 
 cat <<EOF >./python3/DEBIAN/control
-Package: python3
+Package: kevin-python3
 Architecture: all
 Maintainer: Kevin
 Depends: debconf (>= 0.5.00)
@@ -27,7 +34,7 @@ EOF
 
 cat <<EOF >./python3/DEBIAN/copyright
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: python3
+Upstream-Name: kevin-python3
 Upstream-Contact: Name, <email@address>
 
 Files: *
@@ -38,8 +45,15 @@ Full text of licence.
 Unless there is a it can be found in /usr/share/common-licenses
 EOF
 
+cat <<EOF >./python3/DEBIAN/preinst
+rm -fr /usr/lib/python3
+rm -fr /usr/lib/python3.5
+EOF
+
+
+# was: usr/*
 cat <<EOF >./python3/DEBIAN/install
-usr/*
+home/pi/.local/*
 EOF
 
 cat <<EOF >./python3/DEBIAN/postinst
@@ -52,6 +66,17 @@ echo "| Linking libraries         |"
 echo "============================="
 echo ""
 ldconfig
+
+echo ""
+echo "============================="
+echo "| Fixing pip/python links   |"
+echo "============================="
+echo ""
+#LOCAL=/home/pi/.local/bin
+#ln -s ${LOCAL}/pip3.7 ${LOCAL}/pip3
+ln -s /home/pi/.local/bin/python3.7 /home/pi/.local/bin/python3
+wget https://bootstrap.pypa.io/get-pip.py && /home/pi/.local/bin/python3.7 get-pip.py
+/home/pi/.local/bin/pip3 install -U setuptools wheel
 
 echo ""
 echo "============================="
@@ -78,9 +103,9 @@ chmod 0755 ./python3/DEBIAN/*
 
 echo " > building Python ${VERSION}"
 echo ""
-dpkg-deb -v --build python3 python-${VERSION}.deb
+dpkg-deb -v --build python3 ${DEBPKG}
 
 echo ""
 echo " > reading debian package:"
 echo ""
-dpkg-deb --info python-${VERSION}.deb
+dpkg-deb --info ${DEBPKG}
