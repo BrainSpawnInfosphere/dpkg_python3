@@ -9,11 +9,18 @@ if [[ $# -ne 1 ]]; then
   exit 1
 fi
 
+# get full version: 3.7.0
 VERSION=$1
-
+# get short version: 3.7
+SVER=$(cut -d . -f 1-2 <<< ${VERSION})
+# get package name
 DEBPKG=kevin-python-${VERSION}.deb
+# installed as root, location not in path
+BIN=/home/pi/.local/bin
 
+echo ${SVER}
 
+# get rid of old package
 if [ -f  ${DEBPKG} ]; then
   rm -f ${DEBPKG}
 fi
@@ -72,11 +79,10 @@ echo "============================="
 echo "| Fixing pip/python links   |"
 echo "============================="
 echo ""
-#LOCAL=/home/pi/.local/bin
-#ln -s ${LOCAL}/pip3.7 ${LOCAL}/pip3
-ln -s /home/pi/.local/bin/python3.7 /home/pi/.local/bin/python3
-wget https://bootstrap.pypa.io/get-pip.py && /home/pi/.local/bin/python3.7 get-pip.py
-/home/pi/.local/bin/pip3 install -U setuptools wheel
+# ln -s ${BIN}/pip${SVER} ${BIN}/pip3
+ln -s ${BIN}/python${SVER} ${BIN}/python3
+wget https://bootstrap.pypa.io/get-pip.py && ${BIN}/python${SVER} get-pip.py
+${BIN}/pip3 install -U setuptools wheel
 
 echo ""
 echo "============================="
