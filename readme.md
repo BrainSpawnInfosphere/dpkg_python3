@@ -4,6 +4,15 @@ Unfortunately raspbian has old packages and the linux distro model is to move
 slow and not update things. Unfortunately linux homebrew doesn't always work
 (I use homebrew on macOS and it is awesome!) on linux.
 
+# What this does
+
+This package installs to `/home/pi/.local` and doesn't interact with normal debian
+packages from Raspbian. You can install by:
+
+1. Add `export PATH=/home/pi/.local/bin:$PATH` to your `bash_profile`
+2. Install package with: `sudo dpkg -i kevin-python2.deb`
+3. You will most likely need to login again to the `PATH` correction from step 1 takes effect
+
 ## Package Setup
 
 - DEBIAN
