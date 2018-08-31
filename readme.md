@@ -10,7 +10,7 @@ This package installs to `/home/pi/.local` and doesn't interact with normal debi
 packages from Raspbian. You can install by:
 
 1. Add `export PATH=/home/pi/.local/bin:$PATH` to your `bash_profile`
-2. Install package with: `sudo dpkg -i kevin-python2.deb`
+2. Install package with: `sudo dpkg -i kevin-python-3.x.x.deb` where 3.x.x is the current version
 3. You will most likely need to login again to the `PATH` correction from step 1 takes effect
 
 ## Package Setup
