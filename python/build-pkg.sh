@@ -53,8 +53,9 @@ Unless there is a it can be found in /usr/share/common-licenses
 EOF
 
 cat <<EOF >./python3/DEBIAN/preinst
-rm -fr /usr/lib/python3
-rm -fr /usr/lib/python3.5
+#!/bin/bash
+# rm -fr /usr/lib/python3
+# rm -fr /usr/lib/python3.5
 EOF
 
 
